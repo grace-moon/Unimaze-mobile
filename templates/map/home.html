@@ -2,24 +2,13 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- CSS 파일 -->
     <link rel="stylesheet" href="{% static 'map.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/css/autoComplete.min.css">
-    <!-- JS 파일 (jQuery와 Popper.js도 함께 포함) -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
     <script type="module">
         import { VctrApi } from "https://www.vectary.com/viewer-api/v1/api.js";
         // Your Viewer API magic here
@@ -31,11 +20,186 @@
 </html>
 
 <body>
-        <div id="logo_img" style="text-align: center; margin-top: 3%; margin-bottom: 1%; width: 100%;">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'logo_.png' %}" width="300px;">
-            </a>
-        </div>
+    <div id="logo_img" style="text-align: center; margin-top: 3%; margin-bottom: 1%; width: 100%;">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'logo_.png' %}" width="150px;">
+        </a>
+    </div>
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" style="border: none">MENU</button>
+
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body small">
+        ...
+      </div>
+    </div>
+	<div id="map"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7cae786704dc8e9a263f99d1f0794daa"></script>
+    <script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                mapOption = {
+                    center: new kakao.maps.LatLng(36.33639939410993,  127.46123002158983), // 지도의 중심좌표
+                    level: 4 // 지도의 확대 레벨
+                };
+
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다
+            var positions = [
+                {
+                    content: '<div style=" column-count: 2; break-inside: avoid; padding-bottom: 10px;  padding: 5px; width:100%; font-size:10px;" xmlns="http://www.w3.org/1999/html">' +
+                            '<a href="https://place.map.kakao.com/17561874" style="color: black; font-size: 15px "><b>30주년 기념관</b></a></br>' +
+                            '<a href="/TTA_map_detail/1" style="color: orange;">1F</a>' +
+                            '<p>우체국, ATM, 경비실, 주차장, 강의실 : 22107, 22108, 22109, 22110, 22111, 22112, 22113</p>'+
+                            '<a href="/TTA_map_detail/2" style="color: orange;">2F</a>' +
+                            '<p>CafeN, 휴게실, 인쇄실(22216), 강의실 : 22219, 22220, 22221, 22222, 22223, 22224, 22225, 22226, 22314</p>' +
+                            '<a href="/TTA_map_detail/3" style="color: orange;">3F</a>' +
+                            '<p>혜화문화관 연결통로, 지산도서관 연결통로, 휴게실, 시설팀(22313), 강의실 : 22314, 22315, 22316, 22317, 22318, 22319, 22320</p>' +
+                            '<a href="/TTA_map_detail/4" style="color: orange;">4F</a>' +
+                            '<p> 학생문화팀(22406), 학생지원팀(22412), 강의실 : 22413, 22414, 22416, 22417, 22418, 22419, 22420, 22421</p>' +
+                            '<a href="/TTA_map_detail/5" style="color: orange;">5F</a>' +
+                            '<p>하나컨벤션홀</p>' +
+                            '<a href="/TTA_map_detail/6" style="color: orange;">6F</a>' +
+                            '<p>통역실, 관계자 외 출입금지 구역</p>' +
+                            '<a href="/TTA_map_detail/7" style="color: orange;">7F</a>' +
+                            '<p>관계자 외 출입금지 구역</p>' +
+                            '<a hre f="/TTA_map_detail/8" style="color: orange;">8F</a>' +
+                            '<p>관계자 외 출입금지 구역</p>' +
+                            '<a href="/TTA_map_detail/9" style="color: orange;">9F</a>' +
+                            '<p>총장실, 부총장실, 이사장실, 비서실</p>' +
+                            '<a href="/TTA_map_detail/10" style="color: orange;">10F</a>' +
+                            '<p>총회의실, 소회의실</p>' +
+                        '</div>',
+                    latlng: new kakao.maps.LatLng(36.33611566110516,127.46002541375002)
+                },
+                {
+                    content: '<div>공학관</div>',
+                    latlng: new kakao.maps.LatLng(36.33332417963411,127.46180220114597)
+                },
+                {
+                    content: '<div>공학실험관</div>',
+                    latlng: new kakao.maps.LatLng(36.333312597823536,  127.46130092780878)
+                },
+                {
+                    content: '<div>국제생활관(제3생활관)</div>',
+                    latlng: new kakao.maps.LatLng(36.33780715279762, 127.45838685788743)
+                },
+                {
+                    content: '<div>기초과학관</div>',
+                    latlng: new kakao.maps.LatLng(36.33284846039782, 127.4613093292189)
+                },
+                {
+                    content: '<div>맥센터(렉처홀)</div>',
+                    latlng: new kakao.maps.LatLng(36.335998841391, 127.4622746575982)
+                },
+                {
+                    content: '<div>맥센터(메인홀)</div>',
+                    latlng: new kakao.maps.LatLng(36.33596007906786, 127.46297613924514)
+                },
+                {
+                    content: '<div>문무관</div>',
+                    latlng: new kakao.maps.LatLng(36.336016545432535, 127.4576746549923)
+                },
+                {
+                    content: '<div>산학협력관</div>',
+                    latlng: new kakao.maps.LatLng(36.334614695843946, 127.45781124944808)
+                },
+                {
+                    content: '<div>융합과학관</div>',
+                    latlng: new kakao.maps.LatLng(36.33522662733902, 127.45803759343447)
+                },
+                {
+                    content: '<div>응용과학관</div>',
+                    latlng: new kakao.maps.LatLng(36.33381080285414, 127.46180507331417)
+                },
+                {
+                    content: '<div>인문사회관</div>',
+                    latlng: new kakao.maps.LatLng(36.336651239021435, 127.45901497183533)
+                },
+                {
+                    content: '<div>입학홍보관</div>',
+                    latlng: new kakao.maps.LatLng(36.33451875078942, 127.46283395341769)
+                },
+                {
+                    content: '<div>제5생활관-HRC(하모니홀)</div>',
+                    latlng: new kakao.maps.LatLng(36.3337343586822,127.46292955487455)
+                },
+                    {
+                    content: '<div>제5생활관-HRC(하트홀)</div>',
+                    latlng: new kakao.maps.LatLng(36.33323868085334, 127.4629377600259)
+                },       {
+                    content: '<div>제2생활관</div>',
+                    latlng: new kakao.maps.LatLng(36.338237184283706,127.45904655453961)
+                },       {
+                    content: '<div>제4생활관</div>',
+                    latlng: new kakao.maps.LatLng(36.33706017728725, 127.45812629733736)
+                },       {
+                    content: '<div>지산도서관</div>',
+                    latlng: new kakao.maps.LatLng(36.33639939410993,127.46123002158983)
+                },       {
+                    content: '<div>창학관</div>',
+                    latlng: new kakao.maps.LatLng(36.334901973681326, 127.46161102785686)
+                },
+                {
+                    content: '<div>학생회관</div>',
+                    latlng: new kakao.maps.LatLng(36.334298716648476, 127.46147381230575)
+                },
+                {
+                    content: '<div>한의학관</div>',
+                    latlng: new kakao.maps.LatLng(36.33538584456335, 127.45881819852357)
+                },    {
+                    content: '<div>혜화문화관</div>',
+                    latlng: new kakao.maps.LatLng(36.33707036966329,127.46016468871912)
+                },
+                {
+                    content: '<div>The 4th Edu-Park</div>',
+                    latlng: new kakao.maps.LatLng(36.33623064580255, 127.45824396106813)
+                }
+            ];
+
+            var infowindows = [];
+
+            for (var i = 0; i < positions.length; i ++) {
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: positions[i].latlng // 마커의 위치
+                });
+
+                // 인포윈도우를 생성합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: positions[i].content // 인포윈도우에 표시할 내용
+                });
+
+                // 인포윈도우를 infowindows 배열에 추가합니다.
+                infowindows.push(infowindow);
+
+                // 마커에 클릭 이벤트를 등록합니다
+                kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
+            }
+
+            // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+            function makeClickListener(map, marker, infowindow) {
+                return function() {
+                    // 모든 인포윈도우를 닫습니다
+                    for (var i = 0; i < infowindows.length; i++) {
+                        infowindows[i].close();
+                    }
+                    // 클릭한 마커에 해당하는 인포윈도우를 엽니다
+                    infowindow.open(map, marker);
+                };
+            }
+
+            // 지도를 클릭하면 모든 인포윈도우를 닫습니다
+            kakao.maps.event.addListener(map, 'click', function() {
+                for (var i = 0; i < infowindows.length; i++) {
+                    infowindows[i].close();
+                }
+          });
+        </script>
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid d-flex justify-content-end ">
             <ul class="nav nav-tabs justify-content-center" style=" width: 100%; margin-left: 10%; margin-right: 10%">
@@ -154,6 +318,8 @@
     {% block content %}
         <div id="map" style="width:300px; height:500px;"></div>
     {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
         <script>
         const backdrop = document.querySelector('.offcanvas-backdrop.fade.show');
             backdrop.parentNode.removeChild(backdrop);
@@ -193,176 +359,4 @@
       });
     </script>
 
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c79acd57be8ee7ed205682cc3779496c"></script>
-    <script>
-
-
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-            mapOption = {
-                center: new kakao.maps.LatLng(36.33639939410993,  127.46123002158983), // 지도의 중심좌표
-                level: 4 // 지도의 확대 레벨
-            };
-
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-        // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다
-        var positions = [
-            {
-                content: '<div style=" column-count: 2; break-inside: avoid; padding-bottom: 10px;  padding: 5px; width:100%; font-size:10px;" xmlns="http://www.w3.org/1999/html">' +
-                        '<a href="https://place.map.kakao.com/17561874" style="color: black; font-size: 15px "><b>30주년 기념관</b></a></br>' +
-                        '<a href="/TTA_map_detail/1" style="color: orange;">1F</a>' +
-                        '<p>우체국, ATM, 경비실, 주차장, 강의실 : 22107, 22108, 22109, 22110, 22111, 22112, 22113</p>'+
-                        '<a href="/TTA_map_detail/2" style="color: orange;">2F</a>' +
-                        '<p>CafeN, 휴게실, 인쇄실(22216), 강의실 : 22219, 22220, 22221, 22222, 22223, 22224, 22225, 22226, 22314</p>' +
-                        '<a href="/TTA_map_detail/3" style="color: orange;">3F</a>' +
-                        '<p>혜화문화관 연결통로, 지산도서관 연결통로, 휴게실, 시설팀(22313), 강의실 : 22314, 22315, 22316, 22317, 22318, 22319, 22320</p>' +
-                        '<a href="/TTA_map_detail/4" style="color: orange;">4F</a>' +
-                        '<p> 학생문화팀(22406), 학생지원팀(22412), 강의실 : 22413, 22414, 22416, 22417, 22418, 22419, 22420, 22421</p>' +
-                        '<a href="/TTA_map_detail/5" style="color: orange;">5F</a>' +
-                        '<p>하나컨벤션홀</p>' +
-                        '<a href="/TTA_map_detail/6" style="color: orange;">6F</a>' +
-                        '<p>통역실, 관계자 외 출입금지 구역</p>' +
-                        '<a href="/TTA_map_detail/7" style="color: orange;">7F</a>' +
-                        '<p>관계자 외 출입금지 구역</p>' +
-                        '<a hre f="/TTA_map_detail/8" style="color: orange;">8F</a>' +
-                        '<p>관계자 외 출입금지 구역</p>' +
-                        '<a href="/TTA_map_detail/9" style="color: orange;">9F</a>' +
-                        '<p>총장실, 부총장실, 이사장실, 비서실</p>' +
-                        '<a href="/TTA_map_detail/10" style="color: orange;">10F</a>' +
-                        '<p>총회의실, 소회의실</p>' +
-                    '</div>',
-                latlng: new kakao.maps.LatLng(36.33611566110516,127.46002541375002)
-            },
-            {
-                content: '<div>공학관</div>',
-                latlng: new kakao.maps.LatLng(36.33332417963411,127.46180220114597)
-            },
-            {
-                content: '<div>공학실험관</div>',
-                latlng: new kakao.maps.LatLng(36.333312597823536,  127.46130092780878)
-            },
-            {
-                content: '<div>국제생활관(제3생활관)</div>',
-                latlng: new kakao.maps.LatLng(36.33780715279762, 127.45838685788743)
-            },
-            {
-                content: '<div>기초과학관</div>',
-                latlng: new kakao.maps.LatLng(36.33284846039782, 127.4613093292189)
-            },
-            {
-                content: '<div>맥센터(렉처홀)</div>',
-                latlng: new kakao.maps.LatLng(36.335998841391, 127.4622746575982)
-            },
-            {
-                content: '<div>맥센터(메인홀)</div>',
-                latlng: new kakao.maps.LatLng(36.33596007906786, 127.46297613924514)
-            },
-            {
-                content: '<div>문무관</div>',
-                latlng: new kakao.maps.LatLng(36.336016545432535, 127.4576746549923)
-            },
-            {
-                content: '<div>산학협력관</div>',
-                latlng: new kakao.maps.LatLng(36.334614695843946, 127.45781124944808)
-            },
-            {
-                content: '<div>융합과학관</div>',
-                latlng: new kakao.maps.LatLng(36.33522662733902, 127.45803759343447)
-            },
-            {
-                content: '<div>응용과학관</div>',
-                latlng: new kakao.maps.LatLng(36.33381080285414, 127.46180507331417)
-            },
-            {
-                content: '<div>인문사회관</div>',
-                latlng: new kakao.maps.LatLng(36.336651239021435, 127.45901497183533)
-            },
-            {
-                content: '<div>입학홍보관</div>',
-                latlng: new kakao.maps.LatLng(36.33451875078942, 127.46283395341769)
-            },
-            {
-                content: '<div>제5생활관-HRC(하모니홀)</div>',
-                latlng: new kakao.maps.LatLng(36.3337343586822,127.46292955487455)
-            },
-                {
-                content: '<div>제5생활관-HRC(하트홀)</div>',
-                latlng: new kakao.maps.LatLng(36.33323868085334, 127.4629377600259)
-            },       {
-                content: '<div>제2생활관</div>',
-                latlng: new kakao.maps.LatLng(36.338237184283706,127.45904655453961)
-            },       {
-                content: '<div>제4생활관</div>',
-                latlng: new kakao.maps.LatLng(36.33706017728725, 127.45812629733736)
-            },       {
-                content: '<div>지산도서관</div>',
-                latlng: new kakao.maps.LatLng(36.33639939410993,127.46123002158983)
-            },       {
-                content: '<div>창학관</div>',
-                latlng: new kakao.maps.LatLng(36.334901973681326, 127.46161102785686)
-            },
-            {
-                content: '<div>학생회관</div>',
-                latlng: new kakao.maps.LatLng(36.334298716648476, 127.46147381230575)
-            },
-            {
-                content: '<div>한의학관</div>',
-                latlng: new kakao.maps.LatLng(36.33538584456335, 127.45881819852357)
-            },    {
-                content: '<div>혜화문화관</div>',
-                latlng: new kakao.maps.LatLng(36.33707036966329,127.46016468871912)
-            },
-            {
-                content: '<div>The 4th Edu-Park</div>',
-                latlng: new kakao.maps.LatLng(36.33623064580255, 127.45824396106813)
-            }
-        ];
-
-        var infowindows = [];
-
-        for (var i = 0; i < positions.length; i ++) {
-            // 마커를 생성합니다
-            var marker = new kakao.maps.Marker({
-                map: map, // 마커를 표시할 지도
-                position: positions[i].latlng // 마커의 위치
-            });
-
-            // 인포윈도우를 생성합니다
-            var infowindow = new kakao.maps.InfoWindow({
-                content: positions[i].content // 인포윈도우에 표시할 내용
-            });
-
-            // 인포윈도우를 infowindows 배열에 추가합니다.
-            infowindows.push(infowindow);
-
-            // 마커에 클릭 이벤트를 등록합니다
-            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
-        }
-
-        // 인포윈도우를 닫는 클로저를 만드는 함수입니다
-        function makeClickListener(map, marker, infowindow) {
-            return function() {
-                // 모든 인포윈도우를 닫습니다
-                for (var i = 0; i < infowindows.length; i++) {
-                    infowindows[i].close();
-                }
-                // 클릭한 마커에 해당하는 인포윈도우를 엽니다
-                infowindow.open(map, marker);
-            };
-        }
-
-        // 지도를 클릭하면 모든 인포윈도우를 닫습니다
-        kakao.maps.event.addListener(map, 'click', function() {
-            for (var i = 0; i < infowindows.length; i++) {
-                infowindows[i].close();
-            }
-        });
-        </script>
 </body>
