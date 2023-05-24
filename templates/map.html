@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Road Map</title>
     <style>
         canvas {
@@ -8,6 +9,7 @@
           height: auto;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body style="width: 70%">
     <canvas id="myCanvas" width="2129px" height="870px"></canvas>
@@ -23,7 +25,7 @@
             {start: {x: 2400, y: 668}, end: {x: 2231, y: 669}, name:"비상구" },
         ];
 
-        var img = new Image()
+        var img = new Image();
         img.src = '../static/img/25_1F.png';
         img.onload = function() {
             var canvas = document.getElementById('myCanvas');
@@ -39,15 +41,23 @@
                 ctx.moveTo(startX, startY);
                 ctx.lineTo(endX, endY);
                 ctx.lineWidth = 20;
-                if (roads[i].name === 'Road B') { // 수정된 부분
-                    ctx.strokeStyle = "#FF0000"; // 일치하는 경로는 빨간색으로 표시
+                if (roads[i].name === 'Road B') {
+                    ctx.strokeStyle = "#FF0000";
                 } else {
-                    ctx.strokeStyle = "rgba(0, 0, 0, 0)"; // 나머지 경로는 투명색으로 표시
+                    ctx.strokeStyle = "rgba(0, 0, 0, 0)";
                 }
                 ctx.stroke();
                 ctx.fillStyle = "#003931";
             }
         }
+
+        $(document).ready(function() {
+            $('#myCanvas').click(function(event) {
+                var x = event.clientX - $(this).offset().left;
+                var y = event.clientY - $(this).offset().top;
+                console.log('x좌표:', x, 'y좌표:', y);
+            });
+        });
     </script>
 </body>
 </html>
