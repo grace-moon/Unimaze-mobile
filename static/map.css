@@ -12,23 +12,20 @@ body{
     padding-bottom: 100%; /* 가로:세로 비율에 따라 조정 (16:9 비율 예시) */
     position: relative;
     border-radius: 40rem;
-    border:none;
     background: none;
 }
 
 #resetmapbtn {
     margin: 0.5%;
-    border-radius: 100%;
     background: none;
     border: none;
 }
 
 #resetmapbtn:hover {
-    background-color: #b33d3d;
+    border: black;
 }
 
 #resetmapbtn:active {
-    background-color: #b33d3d;
     fill: #000;
     transition: transform 0.3s ease;
 }
