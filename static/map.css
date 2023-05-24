@@ -18,18 +18,23 @@ body{
 
 #resetmapbtn {
     margin: 0.5%;
-    border-radius: 50%;
-    background-color: #003931;
+    border-radius: 100%;
+    background: none;
     border: none;
-    transition: background-color 0.3s ease;
 }
 
 #resetmapbtn:hover {
     background-color: #b33d3d;
 }
 
+#resetmapbtn:active {
+    background-color: #b33d3d;
+    fill: #000;
+    transition: transform 0.3s ease;
+}
+
 #resetmapbtn svg {
-    fill: #FFFFFF;
+    fill: #000;
     transition: transform 0.3s ease;
 }
 
@@ -50,14 +55,4 @@ body{
 }
 #img_unimaze {
     width: 40%;
-}
-
-.position_item{
-    margin: 200px;
-    text-align: center;
-}
-
-.position_item{
-    margin-left: auto;
-    margin-right: auto;
 }

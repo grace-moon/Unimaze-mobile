@@ -36,31 +36,32 @@
         </svg>
     </button>
 </div>
+<div class="mapreset">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.5.0/jquery.mobile-1.5.0.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7cae786704dc8e9a263f99d1f0794daa"></script>
+    <script>
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+            center: new kakao.maps.LatLng(36.33532024319744, 127.46064447452426),
+            level: 4
+        };
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.5.0/jquery.mobile-1.5.0.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7cae786704dc8e9a263f99d1f0794daa"></script>
-<script>
-    var mapContainer = document.getElementById('map');
-    var mapOption = {
-        center: new kakao.maps.LatLng(36.33532024319744, 127.46064447452426),
-        level: 4
-    };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+        // 버튼 클릭 시 이벤트 핸들러
+        document.getElementById('resetmapbtn').addEventListener('click', function() {
+            var center = new kakao.maps.LatLng(36.33532024319744, 127.46064447452426);
+            var level = 4;
 
-    // 버튼 클릭 시 이벤트 핸들러
-    document.getElementById('resetmapbtn').addEventListener('click', function() {
-        var center = new kakao.maps.LatLng(36.33532024319744, 127.46064447452426);
-        var level = 4;
+            // 지도 중심 이동
+            map.setCenter(center);
 
-        // 지도 중심 이동
-        map.setCenter(center);
-
-        // 지도 레벨 초기화
-        map.setLevel(level);
-    });
-</script>
+            // 지도 레벨 초기화
+            map.setLevel(level);
+        });
+    </script>
+</div>
 
 {% block content %}
 
