@@ -3,35 +3,34 @@ body{
     height: auto;
 }
 
+#offcanvasBottom{
+    height: 80%;
+}
 
 #map {
     margin-right: auto;
     margin-left: auto;
-    width: 90%;
+    width: 100%;
     height: 0;
-    padding-bottom: 100%; /* 가로:세로 비율에 따라 조정 (16:9 비율 예시) */
+    padding-bottom: 140%; /* 가로:세로 비율에 따라 조정 (16:9 비율 예시) */
     position: relative;
-    border-radius: 40rem;
     background: none;
 }
 
 #resetmapbtn {
-    margin: 0.5%;
-    background: none;
-    border: none;
+    margin-top: 3%;
 }
-
-#resetmapbtn:hover {
-    border: black;
+.offcanvas-header{
+    padding-bottom: 0%;
 }
 
 #resetmapbtn:active {
-    fill: #000;
+    fill: #ffc70e;
     transition: transform 0.3s ease;
 }
 
 #resetmapbtn svg {
-    fill: #000;
+    fill: #ffc70e;
     transition: transform 0.3s ease;
 }
 
