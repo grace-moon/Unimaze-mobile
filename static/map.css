@@ -13,6 +13,7 @@ body{
     position: relative;
     border-radius: 40rem;
     border:none;
+    background: none;
 }
 
 #resetmapbtn {
@@ -47,6 +48,15 @@ body{
     margin-bottom: 5%;
     width: 100%;
 }
-#img_unimaze{
+#img_unimaze {
     width: 40%;
+}
+
+.position_item{
+    margin-left: 10%;
+    margin: 10%;
+}
+
+.positions-container{
+    column-count: 1;
 }

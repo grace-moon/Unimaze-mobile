@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <title>Unimaze</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -54,29 +54,8 @@ var map = null; // 전역 변수로 map을 선언합니다
 
         var positions = [
             {
-                content: '<div style=" column-count: 2; break-inside: avoid; padding-bottom: 10px;  padding: 5px; width:100%; font-size:10px;" xmlns="http://www.w3.org/1999/html">' +
-                        '<a href="https://place.map.kakao.com/17561874" style="color: black; font-size: 15px "><b>30주년 기념관</b></a></br>' +
-                        '<a href="/TTA_map_detail/1" style="color: orange;">1F</a>' +
-                        '<p>우체국, ATM, 경비실, 주차장, 강의실 : 22107, 22108, 22109, 22110, 22111, 22112, 22113</p>'+
-                        '<a href="/TTA_map_detail/2" style="color: orange;">2F</a>' +
-                        '<p>CafeN, 휴게실, 인쇄실(22216), 강의실 : 22219, 22220, 22221, 22222, 22223, 22224, 22225, 22226, 22314</p>' +
-                        '<a href="/TTA_map_detail/3" style="color: orange;">3F</a>' +
-                        '<p>혜화문화관 연결통로, 지산도서관 연결통로, 휴게실, 시설팀(22313), 강의실 : 22314, 22315, 22316, 22317, 22318, 22319, 22320</p>' +
-                        '<a href="/TTA_map_detail/4" style="color: orange;">4F</a>' +
-                        '<p> 학생문화팀(22406), 학생지원팀(22412), 강의실 : 22413, 22414, 22416, 22417, 22418, 22419, 22420, 22421</p>' +
-                        '<a href="/TTA_map_detail/5" style="color: orange;">5F</a>' +
-                        '<p>하나컨벤션홀</p>' +
-                        '<a href="/TTA_map_detail/6" style="color: orange;">6F</a>' +
-                        '<p>통역실, 관계자 외 출입금지 구역</p>' +
-                        '<a href="/TTA_map_detail/7" style="color: orange;">7F</a>' +
-                        '<p>관계자 외 출입금지 구역</p>' +
-                        '<a hre f="/TTA_map_detail/8" style="color: orange;">8F</a>' +
-                        '<p>관계자 외 출입금지 구역</p>' +
-                        '<a href="/TTA_map_detail/9" style="color: orange;">9F</a>' +
-                        '<p>총장실, 부총장실, 이사장실, 비서실</p>' +
-                        '<a href="/TTA_map_detail/10" style="color: orange;">10F</a>' +
-                        '<p>총회의실, 소회의실</p>' +
-                    '</div>',
+                content:
+                    '<div class="position_item">30주년기념관</div>',
                 latlng: new kakao.maps.LatLng(36.33611566110516,127.46002541375002)
             },
             {
@@ -147,7 +126,7 @@ var map = null; // 전역 변수로 map을 선언합니다
                 latlng: new kakao.maps.LatLng(36.334901973681326, 127.46161102785686)
             },
             {
-                content: '<div>학생회관</div>',
+                content: '<div><p>학생회관</p></div>',
                 latlng: new kakao.maps.LatLng(36.334298716648476, 127.46147381230575)
             },
             {
